@@ -22,6 +22,16 @@ def map_refresh():
     return jsonify({'points': points})
 
 
-@app.route('/contact')
-def contact():
-    return render_template('contact.html', title='Contact')
+@app.route('/about')
+def about():
+    return render_template('about.html', title='about')
+
+
+
+@app.route('/stocks/prediction', methods=['GET'])
+def stock_predict():
+    data = {
+        'test':'11'
+    }
+    return jsonify({'data': data})
+    

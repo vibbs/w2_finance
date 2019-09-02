@@ -6,10 +6,31 @@
 
 {% block content %}
 
-	<h1 class="ui header">{{ title }}</h1>
+
 
 	{% if current_user.is_authenticated %}
-	  	<h2 class="ui header">Hi {{ current_user.first_name }}!</h2>
+		<h2 class="ui header">Hi {{ current_user.first_name }}!</h2>
+		<h3 class="ui header">Stock Prediction</h3>
+		<p>for Coca-cola company on the datase from Sept 2000 to Sept 1st 2019</p>
+		
+	{% else %}
+		<h2 class="ui header">Please Register & login to use this app</h2>
 	{% endif %}
 
+	<script type="text/javascript">
+
+        function refresh_data(){
+            $.ajax({
+                type: "get",
+                async: true,
+                url: "/stocks/prediction"
+            }).done(function(response){
+               console.log(response)
+            });
+        }
+
+        refresh_data();
+
+    </script>
 {% endblock %}
+
