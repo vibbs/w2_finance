@@ -24,7 +24,11 @@ def map_refresh():
 
 @app.route('/about')
 def about():
-    return render_template('about.html', title='about')
+    content = "This is a stock prediction app where using the Sckikit regression"\
+    "training model we will be predictiing the future stock prices for a given company.\n"\
+    "The current prediction is a POC for the company Coca-Cola. Which can be extended to "\
+    "have real time data and predict future stok prices."
+    return render_template('about.html', title='About', content=content)
 
 
 
