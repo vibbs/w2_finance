@@ -30,7 +30,7 @@ style.use('ggplot')
 start = datetime(2000, 1, 1)
 end = datetime(2019, 9, 1)
 
-dataset = web.DataReader("AAPL", 'yahoo', start, end)
+dataset = web.DataReader("COKE", 'yahoo', start, end)
 dataset.tail()
 
 # close_px = dataset['Adj Close']
@@ -59,8 +59,7 @@ forecast_out = int(math.ceil(0.01 * len(dfreg)))
 
 # Separating the label here, we want to predict the AdjClose
 forecast_col = 'Adj Close'
-dfreg['label'] = dfreg[forecast_col]
-# .shift(-forecast_out)
+dfreg['label'] = dfreg[forecast_col].shift(-forecast_out)
 
 
 X = np.array(dfreg.drop(['label'], 1))
@@ -115,12 +114,11 @@ print('The knn regression confidence is ', confidenceknn)
 # this could be any prediction model.
 forecast_set = clfreg.predict(X_lately)
 
-print('--------------forecast_set-------------')
-print(forecast_set)
 dfreg['Forecast'] = np.nan
 
 
 last_date = dfreg.iloc[-1].name
+print(last_date)
 last_unix = last_date
 next_unix = last_unix + timedelta(days=1)
 
@@ -133,7 +131,7 @@ for i in forecast_set:
 
 dfreg['Adj Close'].tail(500).plot()
 
-print(dfreg)
+# print(dfreg)
 dfreg['Forecast'].tail(500).plot()
 plt.legend(loc=4)
 plt.xlabel('Date')
