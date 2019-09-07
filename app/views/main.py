@@ -22,6 +22,20 @@ def map_refresh():
     return jsonify({'points': points})
 
 
-@app.route('/contact')
-def contact():
-    return render_template('contact.html', title='Contact')
+@app.route('/about')
+def about():
+    content = "This is a stock prediction app where using the Sckikit regression"\
+    "training model we will be predictiing the future stock prices for a given company.\n"\
+    "The current prediction is a POC for the company Coca-Cola. Which can be extended to "\
+    "have real time data and predict future stok prices."
+    return render_template('about.html', title='About', content=content)
+
+
+
+@app.route('/stocks/prediction', methods=['GET'])
+def stock_predict():
+    data = {
+        'test':'11'
+    }
+    return jsonify({'data': data})
+    
